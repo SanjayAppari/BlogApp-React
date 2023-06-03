@@ -17,7 +17,7 @@ const BlogSchema = new Schema({
     category:{
         type:String,
         default:"General"
-    },
+    },   
     image:{
         type:String,
         required:true
@@ -30,7 +30,7 @@ const BlogSchema = new Schema({
         {
             text: String,
             date:{ type:Date, default: Date.now },
-            postedby : {type: mongoose.Schema.Types.ObjectId, ref: 'user'}
+            postedby : String
         }
     ]
 });

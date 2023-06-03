@@ -107,4 +107,17 @@ router.post('/getuser', fetchuser ,async (req,res)=>{
 });
 
 
+// ROUTE 4 : Get user by id
+router.get('/getuser/:id', async(req,res)=>{
+    try {
+        const id= req.params.id;
+        const user = await User.findById(id);
+        res.send(user);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Internal Error Occured hhh");
+    }
+});
+
+
 module.exports = router;

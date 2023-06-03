@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const User = require('../models/User');
 const Blog = require('../models/Blogs');
 var fetchuser = require('../middleware/fetchuser');
 const { body, validationResult } = require('express-validator');
@@ -53,6 +53,17 @@ router.get('/getallblogs',async(req,res)=>{
     }
 });
 
+// get blog by id
+router.get('/getblog/:id',async(req,res)=>{
+    try {
+        const blog = await Blog.findById(req.params.id);
+        res.json(blog);
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Internal Error Occured");
+    }
+});
+
 
 router.delete('/deleteblog/:id',fetchuser,async (req,res)=>{
     const {title,description,tag,image} = req.body;
@@ -98,7 +109,6 @@ router.put('/updateblog/:id',fetchuser,async (req,res)=>{
 });
 
 
-
 // comments 
 router.post('/addcomment/:id',fetchuser,[
     body('text','Enter Minimum of one letter').isLength({min:1})
@@ -113,7 +123,9 @@ router.post('/addcomment/:id',fetchuser,[
             const {text} = req.body;
             const postedby = req.user.id;
             console.log(text,postedby);
-            var com={text:text,postedby:postedby};
+            const user = await User.findById(postedby);
+            
+            var com={text:text,postedby: user.name};
             let blog = await Blog.findById(req.params.id);
             blog.comment.push(com);
             blog.save();
