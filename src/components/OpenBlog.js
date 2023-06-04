@@ -5,7 +5,7 @@ function OpenBLog() {
 
   const imageStyle = {
     width: '100%',
-    height: '300px'
+    height: '400px'
   }
   const commentStyle = {
     width: '90%',
@@ -25,7 +25,6 @@ function OpenBLog() {
     console.log('hi');
   },[]);
 
- let p;
   const arr = JSON.parse(localStorage.getItem("commentarr") || "[]");
 
   return (
@@ -56,7 +55,7 @@ function OpenBLog() {
           <div className="col-12 d-flex align-items-center justify-content-center" style={{flexDirection:'column'}}>
             
               {
-                arr.length==0? <h4>No Comments</h4>:
+                arr.length===0? <h4>No Comments</h4>:
                 arr.map((ele)=>{
                   return <div className="comment my-3 p-3" key={ele._id} style={commentStyle}> 
                             <i className="fa-solid fa-trash" style={{float:'right',fontSize:'20px'}}></i>

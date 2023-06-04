@@ -1,7 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Navbar() {
+
+    const navigate = useNavigate();
+    const handleLogout = ()=>{
+        localStorage.removeItem('token');
+        console.log('logout')
+        navigate('/');
+    }
+
+
     return (
         <div className='fixed-top'>
             <nav className="navbar navbar-expand-lg  bg-white p-3" style={{borderBottom:'1px solid #D3D3D3'}}>
@@ -28,9 +37,10 @@ function Navbar() {
                         </ul> 
                         <div className="d-flex navbar-nav align-items-center justify-content-center">
                             <i className="fa-solid fa-moon mx-2" style={{color:'#880ED4',fontSize:'30px'}}></i>
-                            <button className="btn mx-1 my-2" style={{backgroundColor:'#880ED4',color:'white'}}>Login</button>
-                            <button className="btn mx-1 my-2 " style={{backgroundColor:'#880ED4',color:'white'}}>SignUp</button>
-                            <button className="btn mx-1 d-none" style={{backgroundColor:'#880ED4',color:'white'}}>LogOut</button>
+                            <Link to='/login'  className="btn mx-1 my-2" style={{backgroundColor:'#880ED4',color:'white'}}>Login</Link>
+
+                            <Link to='/signup' className="btn mx-1 my-2 " style={{backgroundColor:'#880ED4',color:'white'}}>SignUp</Link>
+                            <button onClick={handleLogout} className="btn mx-1" style={{backgroundColor:'#880ED4',color:'white'}}>LogOut</button>
                         </div>
 
                     </div>

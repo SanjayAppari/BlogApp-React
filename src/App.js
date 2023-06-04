@@ -8,6 +8,8 @@ import BlogState from './context/blogs/BlogState';
 import { useContext } from 'react';
 import blogContext from './context/blogs/blogcontext';
 import AddBlog from './components/AddBlog';
+import Signup from './components/Signup';
+import Login from './components/Login';
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
         <Router>
           <Navbar />
           <Routes>
+            <Route exact path='/signup' element={<Signup/> } />
+            <Route exact path='/login' element={<Login/> } />
             <Route exact path='/addblog' element={<AddBlog/> } />
             <Route exact path='/' element={<Home />} />
             <Route exact path='/openblog' element={<OpenBLog/> } />
