@@ -43,7 +43,7 @@ router.post("/signup",[
                     }
                     var authToken = jwt.sign(data, JWT_SECRET);
                     success=true;
-                    res.json({success,authToken});
+                    res.json({success,authToken,'usernamer':req.body.name});
                 }
             }
             catch(err){
@@ -83,7 +83,7 @@ router.post("/login",[
             }
             var authToken = jwt.sign(data, JWT_SECRET);
             success=true;
-            res.json({success:success,authToken});
+            res.json({success:success,authToken,'usernamer':user.name});
         }
         catch(err){
             console.error(err.message);

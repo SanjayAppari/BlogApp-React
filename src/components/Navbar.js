@@ -4,8 +4,10 @@ import { Link, useNavigate } from 'react-router-dom'
 function Navbar() {
 
     const navigate = useNavigate();
+
     const handleLogout = ()=>{
         localStorage.removeItem('token');
+        localStorage.removeItem('username');
         console.log('logout')
         navigate('/');
     }
@@ -16,8 +18,10 @@ function Navbar() {
             <nav className="navbar navbar-expand-lg  bg-white p-3" style={{borderBottom:'1px solid #D3D3D3'}}>
                 <div className="container-fluid">
                     <Link className="navbar-brand" to="/" style={{fontWeight:'700',color:'#880ED4'}}>
-                        BlogingApp
+                        
+                        {(localStorage.getItem('username')?"Welcome, "+ localStorage.getItem('username'):"BlogingApp")}
                     </Link>
+                    
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                         {/* Menu */}
@@ -37,10 +41,16 @@ function Navbar() {
                         </ul> 
                         <div className="d-flex navbar-nav align-items-center justify-content-center">
                             <i className="fa-solid fa-moon mx-2" style={{color:'#880ED4',fontSize:'30px'}}></i>
+                            {!localStorage.getItem('token') ?
+                            <>
+                            
                             <Link to='/login'  className="btn mx-1 my-2" style={{backgroundColor:'#880ED4',color:'white'}}>Login</Link>
-
                             <Link to='/signup' className="btn mx-1 my-2 " style={{backgroundColor:'#880ED4',color:'white'}}>SignUp</Link>
+                            </>
+                            :
+                            <>
                             <button onClick={handleLogout} className="btn mx-1" style={{backgroundColor:'#880ED4',color:'white'}}>LogOut</button>
+                            </>}
                         </div>
 
                     </div>

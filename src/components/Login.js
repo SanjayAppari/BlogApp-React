@@ -19,6 +19,7 @@ function Login() {
         const json = await response.json();
         console.log(json);
         if(json.success){
+            localStorage.setItem('username',json.usernamer);
             localStorage.setItem('token',json.authToken);
             navigate('/');  
         }

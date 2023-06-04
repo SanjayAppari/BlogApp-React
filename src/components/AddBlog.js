@@ -1,35 +1,39 @@
-import React, { useContext, useRef, useState } from 'react'
-import JoditEditor , { Jodit } from 'jodit-react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import JoditEditor, { Jodit } from 'jodit-react'
 import blogContext from '../context/blogs/blogcontext';
 import { useNavigate } from 'react-router-dom';
 
 function AddBlog() {
 
-
     const navigate = useNavigate();
 
-    const {addBlog} = useContext(blogContext);
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            navigate('/login');
+        }
+    }, []);
+    const { addBlog } = useContext(blogContext);
     const editor = useRef(null);
     const [content, setContent] = useState('');
-    const [newblog , setNewblog] = useState({title:"",description:"",category:"General",image:""});
+    const [newblog, setNewblog] = useState({ title: "", description: "", category: "General", image: "" });
 
-    const onChange = (e)=>{
-        setNewblog({...newblog, [e.target.name]:e.target.value}); 
+    const onChange = (e) => {
+        setNewblog({ ...newblog, [e.target.name]: e.target.value });
     }
 
-    const handleClick = (e)=>{
+    const handleClick = (e) => {
         e.preventDefault();
-        addBlog(newblog.title,newblog.description,newblog.category,newblog.image);
-        setNewblog({title:"",description:"",category:"General",image:""});
+        addBlog(newblog.title, newblog.description, newblog.category, newblog.image);
+        setNewblog({ title: "", description: "", category: "General", image: "" });
         navigate('/blogs')
     }
 
-    return ( 
+    return (
         <div className='container p-5' style={{ marginTop: '135px' }}>
             {/* {JSON.stringify(newblog)} */}
             <div className="border p-4">
                 <center><h4>Write Your Blog</h4></center>
-                <form> 
+                <form>
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label">Title Of the Blog :</label>
                         <input type="email" className="form-control" id="title" name='title' value={newblog.title} onChange={onChange} aria-describedby="emailHelp" />
@@ -38,7 +42,7 @@ function AddBlog() {
                         ref={editor}
                         value={content}
                         // Jodit.modules.Helpers.stripTags
-                        onChange={newContent => setNewblog({...newblog,'description':(newContent)})}  
+                        onChange={newContent => setNewblog({ ...newblog, 'description': (newContent) })}
                     />
 
                     <div className="mb-3">

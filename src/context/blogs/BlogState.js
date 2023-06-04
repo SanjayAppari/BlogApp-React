@@ -53,7 +53,7 @@ const BlogState = (props) => {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ3YjY1NzdiMWI1MTY4MGM1Mzk5NWYyIn0sImlhdCI6MTY4NTgwODUwM30.y13e02aXFG8sBXnE5sgD9sWm5AN5n2EbCTzc4sFz6bA'
+                    'auth-token': localStorage.getItem('token')
                 },
                 body: JSON.stringify({ title, description, category, image })
             });
@@ -64,11 +64,28 @@ const BlogState = (props) => {
             console.error(err.message);
             // res.status(500).send("Internal Error Occured");
         }
-
-
     }
+
+    const addcomment = async(text,id)=>{
+        try {
+            const response = await fetch(`${host}/api/blog/addcomment/${id}`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': localStorage.getItem('token')
+                },
+                body: JSON.stringify({ text })
+            });
+            const json = await response.json();
+            console.log("comment added");
+            console.log(json);
+        } catch (err) {
+            console.error(err.message);
+        }
+    }
+
     return (
-        <BlogContext.Provider value={{ blogs, getallblogs, presents, getblogbyid, bloguser, getuserbyid, blogcomment, addBlog }}>
+        <BlogContext.Provider value={{ blogs, getallblogs, presents, getblogbyid, bloguser, getuserbyid, blogcomment, addBlog , addcomment}}>
             {props.children}
         </BlogContext.Provider>
     )

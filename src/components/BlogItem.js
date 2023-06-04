@@ -10,15 +10,13 @@ function BlogItem(props) {
 
   const handleId = async (id)=>{
     localStorage.setItem("blogId",id);
-
     try {
       const response = await fetch(`${host}/api/blog/getblog/${id}`,{
         method:'GET',
       });
-      const json = await response.json();
+      const json = await response.json(); 
       localStorage.setItem('userId',json.user);
       const arr = JSON.stringify(json.comment);
-      
       localStorage.setItem('commentarr',arr);
       navigate("/openblog");
 
