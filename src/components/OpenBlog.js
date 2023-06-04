@@ -37,6 +37,7 @@ function OpenBLog() {
     });
 
     console.log('deleted');
+    alert('Blog Deleted')
     navigate('/blogs');
 
   }
@@ -52,14 +53,15 @@ function OpenBLog() {
   const arr = JSON.parse(localStorage.getItem("commentarr") || "[]");
 
   return (
-    <div style={{ marginTop: '135px' }}>
+    <div >
       <div className="container border p-0">
         <div className="col-12">
           <img src={presents.image} style={imageStyle} alt="" />
         </div>
-        <div className="col-12 pt-2 pb-2 d-flex align-items-center justify-content-center border-bottom" >
+        <div className="col-12 pt-2 pb-2 d-flex align-items-center justify-content-center border-top border-bottom" >
           <center>
             <h4 style={{ color: '#880ED4', fontWeight: '600' }}>{presents.title}</h4>
+            <b>Category</b> : {presents.category} <br />
             <b>Author</b> : {bloguser.name} <br />
             <b>Email</b> : {bloguser.email} <br />
             {

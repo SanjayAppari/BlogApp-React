@@ -8,7 +8,8 @@ function Login() {
 
 
     const handleClick = async (e)=>{
-        e.preventDefault();
+        try {
+            e.preventDefault();
         const response = await fetch(`${host}/api/auth/login`, {
             method: 'POST',
             headers: {
@@ -26,6 +27,10 @@ function Login() {
         else{
             alert("Enter Invalid Credentials");
         }
+        } catch (err) {
+            console.error(err.message);
+            // res.status(500).send("Internal Error Occured");
+        }
     }
 
     const onChange = (e)=>{
@@ -33,7 +38,7 @@ function Login() {
     }
 
   return (
-    <div className='container p-5' style={{marginTop:'134px',color:'#880ED4'}}>
+    <div className='container p-5' style={{color:'#880ED4'}}>
          <div className="container border p-5">
                 <center><h3 className='mb-4' style={{ color: '#880ED4' }}>Log In</h3></center>
                 <form>

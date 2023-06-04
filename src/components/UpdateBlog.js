@@ -5,8 +5,14 @@ import { useRef } from 'react';
 import { useContext } from 'react';
 import blogContext from '../context/blogs/blogcontext';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function UpdateBlog() {
+    useEffect(() => {
+        if (!localStorage.getItem('token')) {
+            navigate('/login');
+        }
+    }, []);
     const navigate = useNavigate();
     const editor = useRef(null);
     // const [content, setContent] = useState('');
@@ -20,11 +26,12 @@ function UpdateBlog() {
     const handlesubmit = (e)=>{
         e.preventDefault();
         updateBlog(presents.title ,presents.description,presents.category,presents.image);
+        alert('Blog Updated Succefully')
         navigate('/openblog');
     }
 
   return (
-    <div className='container p-5' style={{ marginTop: '135px' }}>
+    <div className='container p-5'>
     {/* {JSON.stringify(presents)} */}
     <div className="border p-4">
         <center><h4>Update Your Blog</h4></center>

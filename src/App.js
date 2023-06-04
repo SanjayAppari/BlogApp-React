@@ -21,6 +21,7 @@ function App() {
       <BlogState>
         <Router>
           <Navbar />
+          <div style={{height:'120px'}}></div>
           <Routes>
             <Route exact path='/signup' element={<Signup/> } />
             <Route exact path='/login' element={<Login/> } />

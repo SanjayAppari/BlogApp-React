@@ -14,17 +14,17 @@ function Blogs(props) {
 
   
   return (
-    <div className='row d-flex align-items-center justify-content-center mx-4' style={{marginTop:'150px'}}>
+    <div className='row d-flex align-items-center justify-content-center mx-4'>
         <h3>{category.charAt(0).toUpperCase() + category.slice(1)} Blogs</h3>
         {
-          
+            !blogs.length ? <h5>No Blogs</h5> :
             blogs.map((ele)=>{
               // return <BlogItem key={ele._id} blog={ele} />
                if(category==='all') 
                return <BlogItem key={ele._id} blog={ele} />
                else if( ele.category===category) 
                return <BlogItem key={ele._id} blog={ele} />
-            })
+            }) 
         }
     </div>
   )

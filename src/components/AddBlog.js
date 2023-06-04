@@ -25,11 +25,12 @@ function AddBlog() {
         e.preventDefault();
         addBlog(newblog.title, newblog.description, newblog.category, newblog.image);
         setNewblog({ title: "", description: "", category: "General", image: "" });
+        alert('Blog Added Succefully')
         navigate('/blogs')
     }
 
     return (
-        <div className='container p-5' style={{ marginTop: '135px' }}>
+        <div className='container p-5'>
             {/* {JSON.stringify(newblog)} */}
             <div className="border p-4">
                 <center><h4>Write Your Blog</h4></center>

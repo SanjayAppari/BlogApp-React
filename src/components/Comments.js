@@ -53,11 +53,13 @@ function Comments(props) {
     setComment({...comment,[e.target.name]:e.target.value});
    }
   const handleComment = async (e)=>{
+        if(!localStorage.getItem('username')) navigate('/login')
         e.preventDefault();
         await addcomment(comment.text,localStorage.getItem("blogId"));
         serClicked(clicked+1);
         setComment({text:""});
         handlecomments();
+        alert('Comment Added Succefully')
   }
 
   const handledelete= async (id)=>{
@@ -68,6 +70,7 @@ function Comments(props) {
         method:'DELETE',
     }); 
     serClicked(clicked+1);
+    alert('Comment Deleted')
   }
 
     return (
@@ -90,13 +93,12 @@ function Comments(props) {
                     
                     arr.length === 0 ? <h4>No Comments</h4>
                     : arr.map((ele)=>{
+                      // {console.log(ele.postedby ,localStorage.getItem('username'))}
                         return <div key={ele._id} className="comment my-3 px-3 py-3" style={commentStyle}>
-                        { ele.postedby === localStorage.getItem('username')  &&
-                           <i className="fa-solid fa-trash" onClick={()=>{handledelete(ele._id)}} style={{ float: 'right', fontSize: '20px',cursor: "pointer" }}></i>
+                        { ele.postedby === localStorage.getItem('username') ? <i className="fa-solid fa-trash" onClick={()=>{handledelete(ele._id)}} style={{ float: 'right', fontSize: '20px',cursor: "pointer" }}></i>:''
                         }
-                        <h6><b>UserName</b>: {ele.postedby}</h6>
-                        <h6><b>Comment</b> : {ele.text}</h6>
-                        <h6><b>Commented On</b>  : { new Date(ele.date).toLocaleDateString()} - { new Date(ele.date).toLocaleTimeString()}</h6>
+                        <h5>{ele.postedby} <span style={{fontSize:'12px'}}>{ new Date(ele.date).toLocaleDateString()} - { new Date(ele.date).toLocaleTimeString()}</span></h5> 
+                        <p>{ele.text}</p>
                     </div>
                     })
                 }

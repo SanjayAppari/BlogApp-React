@@ -22,6 +22,7 @@ function Signup() {
                 },
                 body: JSON.stringify({ name, email, password })
             });
+            console.log('si');
             const json = await response.json();
             console.log(json);
             if (json.success) {
@@ -41,8 +42,7 @@ function Signup() {
 
     return (
 
-        <div className='container  p-5' style={{ marginTop: '134px', color: '#880ED4' }}>
-            {JSON.stringify(credentials)}
+        <div className='container  p-5' style={{color: '#880ED4' }}>
             <div className="container border p-5">
                 <center><h3 className='mb-4' style={{ color: '#880ED4' }}>Sign Up</h3></center>
                 <form>
