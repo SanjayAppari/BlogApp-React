@@ -12,10 +12,10 @@ function OpenBLog() {
 
 
 
-  const navigate= useNavigate();
-  const { presents, getblogbyid, bloguser, getuserbyid , addcomment} = useContext(blogContext);
+  const navigate = useNavigate();
+  const { presents, getblogbyid, bloguser, getuserbyid, addcomment } = useContext(blogContext);
 
-  
+
 
   useEffect(() => {
     const id = localStorage.getItem("blogId");
@@ -24,6 +24,29 @@ function OpenBLog() {
     getuserbyid(userid);
   }, []);
 
+
+  const handledelete = async (e) => {
+    e.preventDefault();
+    const id = localStorage.getItem('blogId');
+    const response = await fetch(`${host}/api/blog/deleteblog/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token': localStorage.getItem('token')
+      }
+    });
+
+    console.log('deleted');
+    navigate('/blogs');
+
+  }
+
+  const handleupdate = (e)=>{
+    e.preventDefault();
+    console.log(presents.title);
+    navigate('/updateblog')
+
+  }
 
 
   const arr = JSON.parse(localStorage.getItem("commentarr") || "[]");
@@ -42,10 +65,10 @@ function OpenBLog() {
             {
               bloguser.name === localStorage.getItem('username') &&
               <>
-                <button className="btn btn-primary my-2 mx-2 border-0" style={{ backgroundColor: '#880ED4', color: 'white' }}>
+                <button onClick={handleupdate} className="btn btn-primary my-2 mx-2 border-0" style={{ backgroundColor: '#880ED4', color: 'white' }}>
                   <i className="fa-solid fa-pen"></i> Update
                 </button>
-                <button className="btn btn-primary my-2 mx-2 border-0" style={{ backgroundColor: '#880ED4', color: 'white' }}>
+                <button onClick={handledelete} className="btn btn-primary my-2 mx-2 border-0" style={{ backgroundColor: '#880ED4', color: 'white' }}>
                   <i className="fa-solid fa-trash"></i> Delete
                 </button>
               </>
@@ -60,9 +83,9 @@ function OpenBLog() {
         </div>
         <div className="comment col-12 px-4 py-3">
           <h5 style={{ color: '#880ED4' }}>Comment</h5>
-          
-          
-          <Comments blogId={presents._id} bloguser={bloguser}/>
+
+
+          <Comments blogId={presents._id} bloguser={bloguser} />
         </div>
       </div>
     </div>

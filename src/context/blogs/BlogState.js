@@ -48,7 +48,6 @@ const BlogState = (props) => {
 
     const addBlog = async (title, description, category, image) => {
         try {
-            console.log('entered')
             const response = await fetch(`${host}/api/blog/addblog`, {
                 method: 'POST',
                 headers: {
@@ -58,8 +57,24 @@ const BlogState = (props) => {
                 body: JSON.stringify({ title, description, category, image })
             });
             const json = await response.json();
-            console.log("added");
-            console.log(json);
+        } catch (err) {
+            console.error(err.message);
+            // res.status(500).send("Internal Error Occured");
+        }
+    }
+
+    const updateBlog = async(title, description, category, image)=>{
+        try {
+            const id = localStorage.getItem('blogId');
+            const response = await fetch(`${host}/api/blog/updateblog/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': localStorage.getItem('token')
+                },
+                body: JSON.stringify({ title, description, category, image })
+            });
+            const json = await response.json();
         } catch (err) {
             console.error(err.message);
             // res.status(500).send("Internal Error Occured");
@@ -85,7 +100,7 @@ const BlogState = (props) => {
     }
 
     return (
-        <BlogContext.Provider value={{ blogs, getallblogs, presents, getblogbyid, bloguser, getuserbyid, blogcomment, addBlog , addcomment}}>
+        <BlogContext.Provider value={{ blogs, getallblogs, presents, setPresents, getblogbyid, bloguser, getuserbyid, blogcomment, addBlog , addcomment,updateBlog}}>
             {props.children}
         </BlogContext.Provider>
     )

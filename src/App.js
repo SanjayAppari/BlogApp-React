@@ -10,6 +10,7 @@ import blogContext from './context/blogs/blogcontext';
 import AddBlog from './components/AddBlog';
 import Signup from './components/Signup';
 import Login from './components/Login';
+import UpdateBlog from './components/UpdateBlog';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
             <Route exact path='/signup' element={<Signup/> } />
             <Route exact path='/login' element={<Login/> } />
             <Route exact path='/addblog' element={<AddBlog/> } />
+            <Route exact path='/updateblog' element={ <UpdateBlog /> } />
             <Route exact path='/' element={<Home />} />
             <Route exact path='/openblog' element={<OpenBLog/> } />
             <Route exact path='/blogs' element={<Blogs category='all'/>} />

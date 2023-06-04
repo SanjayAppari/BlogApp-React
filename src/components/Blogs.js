@@ -16,7 +16,6 @@ function Blogs(props) {
   return (
     <div className='row d-flex align-items-center justify-content-center mx-4' style={{marginTop:'150px'}}>
         <h3>{category.charAt(0).toUpperCase() + category.slice(1)} Blogs</h3>
-        {console.log(blogs.length)}
         {
           
             blogs.map((ele)=>{

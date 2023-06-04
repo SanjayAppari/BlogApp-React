@@ -64,7 +64,7 @@ function AddBlog() {
                     <button onClick={handleClick} type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
-            {content}
+            {/* {content} */}
         </div>
     )
 }
