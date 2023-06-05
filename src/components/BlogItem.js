@@ -52,7 +52,7 @@ function BlogItem(props) {
             </div>
          </div>
             <div className="content">
-                <h5 style={{ color: '#880ED4' }}>{blog.title}</h5>
+                <h5 style={{ color: '#880ED4' }}>{blog.title.slice(0,30)+" . . ."}</h5>
                 <p style={{ color: 'grey', fontSize: '17px' }} dangerouslySetInnerHTML={{ __html: blog.description.slice(0,250) +"   . . . ." }}></p>
                 <Link onClick={()=>{handleId(blog._id)}}  style={{ backgroundColor: '#880ED4', color: 'white' }} className="btn ">Read More</Link>
             </div>

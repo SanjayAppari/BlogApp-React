@@ -19,8 +19,7 @@ function Blogs(props) {
         <center><h3 className='mb-4' style={{color:'#880ED4',fontWeight:'700'}}>{category.charAt(0).toUpperCase() + category.slice(1)} Blogs</h3></center>
         {
             
-            !blogs.length ? <h5>No Blogs Found</h5> 
-            : blogs.map((ele)=>{
+            blogs.map((ele)=>{
                c+=1;
                if(c>2 && category==='Latest') return
                if(category==='Latest'){
