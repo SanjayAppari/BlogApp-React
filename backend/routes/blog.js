@@ -9,7 +9,7 @@ const { body, validationResult } = require('express-validator');
 
 router.post('/addblog',fetchuser,[
     body('title','Enter Valid Title').isLength({min:3}), 
-    body('description','Description Should Be atleast Length Of 5').isLength({min:5})
+    body('description','Description Should Be atleast Length Of 5').isLength({min:300})
 ], async (req,res)=>{
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

@@ -21,7 +21,8 @@ const BlogState = (props) => {
 
             });
             const json = await response.json();
-            setBlogs(json);
+            const arr = json.reverse();
+            setBlogs(arr);
         } catch (err) {
             console.error(err.message);
             // res.status(500).send("Internal Error Occured");
