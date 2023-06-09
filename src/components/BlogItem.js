@@ -37,7 +37,7 @@ function BlogItem(props) {
             <Link onClick={()=>{handleId(blog._id)}}  className="btn btn-primary">Read More</Link>
           </div>
       </div> */}
-{console.log(props.mode)}
+{/* {console.log(props.mode)} */}
 
       <div className={`blogitem d-flex shadow-lg bg-${props.mode}`}>
          <div className="image-content">

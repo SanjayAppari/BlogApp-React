@@ -58,8 +58,11 @@ const BlogState = (props) => {
                 body: JSON.stringify({ title, description, category, image })
             });
             const json = await response.json();
+            // console.log(json);
+            return {"error":0};
         } catch (err) {
-            console.error(err.message);
+            // console.error(err.message);
+            return {"error":1};
             // res.status(500).send("Internal Error Occured");
         }
     }
@@ -76,8 +79,10 @@ const BlogState = (props) => {
                 body: JSON.stringify({ title, description, category, image })
             });
             const json = await response.json();
+            return {"error":0};
         } catch (err) {
             console.error(err.message);
+            return {"error":1};
             // res.status(500).send("Internal Error Occured");
         }
     }

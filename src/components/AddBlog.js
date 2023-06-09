@@ -21,12 +21,24 @@ function AddBlog() {
         setNewblog({ ...newblog, [e.target.name]: e.target.value });
     }
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        addBlog(newblog.title, newblog.description, newblog.category, newblog.image);
-        setNewblog({ title: "", description: "", category: "General", image: "" });
-        alert('Blog Added Succefully')
-        navigate('/blogs')
+        if (newblog.image === '') {
+            alert('Enter image url ')
+            navigate('/addblog');
+        }
+        else {
+            const response = await addBlog(newblog.title, newblog.description, newblog.category, newblog.image);
+            if (response.error) {
+                alert('Maintain minimum lengths')
+                navigate('/addblog');
+            }
+            else {
+                setNewblog({ title: "", description: "", category: "General", image: "" });
+                alert('Blog Added Succefully')
+                navigate('/blogs')
+            }
+        }
     }
 
     return (
@@ -39,6 +51,7 @@ function AddBlog() {
                         <label htmlFor="title" className="form-label">Title Of the Blog :</label>
                         <input type="email" className="form-control" id="title" name='title' value={newblog.title} onChange={onChange} aria-describedby="emailHelp" />
                     </div>
+                    <h6>Description: Minimum of 300 characters</h6>
                     <JoditEditor className='mb-3'
                         ref={editor}
                         value={content}
@@ -60,7 +73,7 @@ function AddBlog() {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="image" className="form-label">Enter Poster URL :</label>
-                        <input type="text" className="form-control" id="image" name='image' value={newblog.image} onChange={onChange} aria-describedby="emailHelp" />
+                        <input type="text" required className="form-control" id="image" name='image' value={newblog.image} onChange={onChange} aria-describedby="emailHelp" />
                     </div>
                     <button onClick={handleClick} type="submit" className="btn btn-primary">Submit</button>
                 </form>
